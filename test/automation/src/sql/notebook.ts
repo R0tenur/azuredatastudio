@@ -99,16 +99,11 @@ export class Notebook {
 		return this.code.waitForTextContent(selector, undefined, c => accept(c.replace(/\u00a0/g, ' ')));
 	}
 
-	// async addCellFromPlaceholder(cellType: 'markdown' | 'code'): Promise<void> {
-	// 	const placeholderTextSelector = 'div[class="placeholder-cell-component text"]';
-	// 	if (cellType === 'markdown') {
-	// 		await this.code.waitAndClick(`${placeholderTextSelector} p a[textContent="+ Text"]`);
-	// 	} else {
-	// 		await this.code.waitAndClick(`${placeholderTextSelector} p a[textContent="+ Code"]`);
-	// 	}
-
-	// 	await this.code.waitForElement('.notebook-cell.active');
-	// }
+	async addCellFromPlaceholder(cellType: 'Markdown' | 'Code'): Promise<void> {
+		const placeholderTextSelector = 'div[class="placeholder-cell-component text"]';
+		await this.code.waitAndClick(`${placeholderTextSelector} p a[id="add${cellType}"]`);
+		await this.code.waitForElement('.notebook-cell.active');
+	}
 
 	private static readonly placeholderSelector = 'div.placeholder-cell-component';
 	async waitForPlaceholder(): Promise<void> {

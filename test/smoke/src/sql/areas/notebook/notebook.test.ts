@@ -65,9 +65,8 @@ export function setup() {
 		it('can perform basic text cell functionality', async function () {
 			const app = this.app as Application;
 			await app.workbench.sqlNotebook.newUntitledNotebook();
-			// await app.workbench.sqlNotebook.addCellFromPlaceholder('markdown');
 			await app.workbench.sqlNotebook.waitForPlaceholder();
-			await app.workbench.sqlNotebook.addCell('markdown');
+			await app.workbench.sqlNotebook.addCellFromPlaceholder('Markdown');
 			await app.workbench.sqlNotebook.waitForPlaceholderGone();
 			await app.code.dispatchKeybinding('escape');
 			await app.workbench.sqlNotebook.waitForDoubleClickToEdit();
